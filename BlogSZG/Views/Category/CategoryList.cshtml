@@ -1,0 +1,14 @@
+﻿@model IEnumerable<EntityLayer.Category>
+@{
+    foreach (var item in Model)
+    {
+        <ul class="tm-category-list">
+            <li class="tm-category">
+                <div class="align-self-center">
+                    @item.CategoryName
+                </div>
+            </li>
+        </ul>
+    }
+
+}

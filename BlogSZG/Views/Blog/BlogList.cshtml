@@ -1,0 +1,73 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+@model IEnumerable<EntityLayer.Blog>
+@{
+
+
+    foreach (var item in Model)
+    {
+        string color;
+
+        switch (item.CategoryId)
+        {
+            case 1:
+                color = "bg-danger";
+                break;
+            case 2:
+                color = "bg-info";
+                break;
+            case 3:
+                color = "bg-warning";
+                break;
+            case 4:
+                color = "bg-secondary";
+                break;
+            default:
+                color = "bg-primary";
+                break;
+        };
+
+        <div class="row tm-row">
+
+            <article class="col-12 col-md-6 tm-post">
+                <hr class="tm-hr-primary">
+                <a href="/Blog/Post/@item.BlogId" class="effect-lily tm-post-link tm-pt-60">
+                    <div class="tm-post-link-inner">
+                        <img src="@item.BlogImg" alt="Image" class="img-fluid">
+                    </div>
+                    <!--<span class="position-absolute tm-new-badge">New</span>-->
+                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">@item.BlogTitle</h2>
+                </a>
+                @{
+                    string content;
+                    if (item.BlogContent.Length < 200)
+                    {
+                        content = item.BlogContent.Substring(0, item.BlogContent.Length);
+                        <p class="tm-pt-30">@content</p>
+                    }
+                    else
+                    {
+                        content = item.BlogContent.Substring(0, 200);
+                        <p class="tm-pt-30">@content...</p>
+                        <a href="/Blog/Post/@item.BlogId">Devamını oku</a>
+                    }
+                }
+                <div class="d-flex justify-content-between tm-pt-45">
+                    <span class="@color">@item.CategoryId</span>
+                    <span class="tm-color-primary">@(((DateTime)item.BlogDate).ToString("dd-MMM-yyyy"))</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <span>36 comments</span>
+                    <span><a asp-action="Index" asp-controller="Author">by @item.AuthorId</a></span>
+                </div>
+            </article>
+        </div>
+    }
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+            LiElementClasses = new string[] { "tm-paging-item" },
+            PageClasses = new string[] { "tm-paging-link" }
+        })
+}

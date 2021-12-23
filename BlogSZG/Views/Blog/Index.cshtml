@@ -1,0 +1,11 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IEnumerable<EntityLayer.Blog>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@Html.Partial("SearchForm")
+@Html.Partial("BlogList", Model)
+@Html.Partial("Footer")

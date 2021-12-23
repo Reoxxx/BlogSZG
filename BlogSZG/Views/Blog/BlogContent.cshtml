@@ -1,0 +1,8 @@
+﻿@model EntityLayer.Blog
+<div class="mb-4">
+    <h1 class="pt-1 tm-color-primary tm-post-title">@Model.BlogTitle </h1>
+    <p class="tm-mb-40">@(((DateTime)Model.BlogDate).ToString("dd-MMM-yyyy")) posted by @Model.AuthorId</p>
+    <p>@Model.BlogContent</p>
+    <span class="d-block text-right tm-color-primary">@Model.CategoryId</span>
+</div>
+

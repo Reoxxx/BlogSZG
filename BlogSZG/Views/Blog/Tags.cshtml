@@ -1,0 +1,12 @@
+﻿@model IEnumerable<EntityLayer.Tag>
+<hr style="border-top: 2px solid #808080">
+<div class="tags">
+    @{ 
+        foreach(var item in Model)
+        {
+            <div>@item.name</div>
+        }
+    }
+    
+</div>
+<hr style="border-top: 2px solid #808080">

@@ -1,0 +1,9 @@
+﻿@model BusinessLayer.CategoryManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+@Html.Partial("/Views/Blog/SearchForm.cshtml")
+@Html.Partial("CategoryList", Model.GetAll())
+@Html.Partial("/Views/Blog/Footer.cshtml")
+

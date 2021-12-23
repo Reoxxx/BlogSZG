@@ -1,0 +1,16 @@
+﻿@model EntityLayer.Blog
+@{
+    ViewData["Title"] = "Post";
+}
+@Html.Partial("SearchForm")
+@Html.Partial("BlogCover", Model.BlogImg)
+<div class="row tm-row">
+    <div class="col-auto w-100 d-flex justify-content-lg-center">
+        <div class="">
+            @Html.Partial("BlogContent", Model)
+            <a href="@Url.Action("Commentlist","Comment",new {id=Model.BlogId , area="Post"})">Yorumlar</a>
+            @Html.Partial("/Views/Comment/CreateComment.cshtml")
+        </div>
+    </div>
+</div>
+@Html.Partial("Footer")
