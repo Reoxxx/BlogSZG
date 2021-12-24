@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EntityLayer.Comment>
+<div>
+
+    @if (Model.Any())
+        foreach (var item in Model)
+        {
+            <h2 class="tm-color-primary tm-post-title">Comments</h2>
+            <hr class="tm-hr-primary tm-mb-45">
+            <div class="tm-comment tm-mb-45">
+                <figure class="tm-comment-figure">
+                    <img src="/img/comment-1.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+                    <figcaption class="tm-color-primary text-center">Mark Sonny</figcaption>
+                </figure>
+                <div class="d-flex flex-column">
+                    <h4>@item.CommentSubject</h4>
+                    <div>
+                        <p>@item.CommentContent</p>
+                        <div class="d-flex justify-content-between">
+                            <span class="tm-color-primary">@(((DateTime)item.CommentDate).ToString("dd-MMM-yyyy"))</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+</div>

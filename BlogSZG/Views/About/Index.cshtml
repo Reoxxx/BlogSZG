@@ -1,9 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Index";
-}
-@Html.Partial("AboutCover")
-@Html.Partial("AboutContent")
-@Html.Partial("AboutAuthors")
+﻿
+@model EntityLayer.About
+<div class="row tm-row tm-mb-45">
+    <div class="col-12">
+        <hr class="tm-hr-primary tm-mb-55">
+        <img src="@Model.AboutImg" alt="Image" class="img-fluid w-100">
+    </div>
+</div>
+
+<div class="row tm-row tm-mb-40">
+    <div class="col-12">
+        <div class="mb-4">
+            <h2 class="pt-2 tm-mb-40 tm-color-primary tm-post-title">Hakkında</h2>
+            <p>@Model.AboutContent</p>
+            <p>@Model.AboutContent1</p>
+            <p>@Model.AboutContent2</p>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("AboutAuthors")
 
 
 

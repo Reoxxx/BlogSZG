@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +9,10 @@ namespace BlogSZG.Controllers
 {
     public class AuthorController : Controller
     {
-        public IActionResult Index()
+        AuthorManager authorManager = new AuthorManager();
+        public IActionResult Index(int id)
         {
-            return View();
-        }
-
-        public PartialViewResult AuthorBlogs()
-        {
-            return PartialView();
-        }
-
-        public PartialViewResult AuthorAbout()
-        {
-            return PartialView();
+            return View(authorManager.GetAuthorById(id));
         }
     }
 }

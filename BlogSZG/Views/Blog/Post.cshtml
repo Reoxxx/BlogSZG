@@ -1,15 +1,31 @@
-﻿@model EntityLayer.Blog
+﻿
+@model EntityLayer.Blog
 @{
     ViewData["Title"] = "Post";
 }
 @Html.Partial("SearchForm")
-@Html.Partial("BlogCover", Model.BlogImg)
+
 <div class="row tm-row">
     <div class="col-auto w-100 d-flex justify-content-lg-center">
         <div class="">
-            @Html.Partial("BlogContent", Model)
-            <a href="@Url.Action("Commentlist","Comment",new {id=Model.BlogId , area="Post"})">Yorumlar</a>
-            @Html.Partial("/Views/Comment/CreateComment.cshtml")
+            <hr class="tm-hr-primary tm-mb-20">
+            <div class="row tm-row">
+                <div class="col-12">
+                    <img src="@Model.BlogImg" alt="Image" class="img-fluid w-100">
+                </div>
+            </div>
+            <hr class="tm-hr-primary tm-mb-55">
+
+            <div class="mb-4">
+                <h1 class="pt-1 tm-color-primary tm-post-title">@Model.BlogTitle </h1>
+                <p class="tm-mb-40">@(((DateTime)Model.BlogDate).ToString("dd-MMM-yyyy")) posted by @await Component.InvokeAsync("AuthorByBlog", Model.AuthorId)</p>
+                <p>@Model.BlogContent</p>
+                <span class="d-block text-right tm-color-primary">@await Component.InvokeAsync("CategoryByBlog", Model.CategoryId)</span>
+            </div>
+
+            @await Component.InvokeAsync("CommentList", Model.BlogId)
+
+            @Html.Partial("/Views/Comment/AddComment.cshtml",new EntityLayer.Comment(), new ViewDataDictionary(ViewData) { { "BlogId", Model.BlogId } })
         </div>
     </div>
 </div>

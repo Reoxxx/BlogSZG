@@ -2,32 +2,20 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Mvc.Common
 @model IEnumerable<EntityLayer.Blog>
+
 @{
+    ViewData["Title"] = "Home Page";
+}
 
-
+@Html.Partial("SearchForm")
+ 
+@{
+    <h1 style="text-align: center;"> 
+        @Html.ActionLink(TempData["categoryName"].ToString(), "BlogsByCategory", "Blog", new { id = TempData["categoryId"] })
+    </h1>
+    @if(Model.Any())
     foreach (var item in Model)
     {
-        string color;
-
-        switch (item.CategoryId)
-        {
-            case 1:
-                color = "bg-danger";
-                break;
-            case 2:
-                color = "bg-info";
-                break;
-            case 3:
-                color = "bg-warning";
-                break;
-            case 4:
-                color = "bg-secondary";
-                break;
-            default:
-                color = "bg-primary";
-                break;
-        };
-
         <div class="row tm-row">
 
             <article class="col-12 col-md-6 tm-post">
@@ -54,13 +42,13 @@
                     }
                 }
                 <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="@color">@item.CategoryId</span>
+                    @await Component.InvokeAsync("CategoryByBlog", item.CategoryId)
                     <span class="tm-color-primary">@(((DateTime)item.BlogDate).ToString("dd-MMM-yyyy"))</span>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <span>36 comments</span>
-                    <span><a asp-action="Index" asp-controller="Author">by @item.AuthorId</a></span>
+                    @await Component.InvokeAsync("CommentCount", item.BlogId)
+                    @await Component.InvokeAsync("AuthorByBlog", item.AuthorId)
                 </div>
             </article>
         </div>
@@ -71,3 +59,4 @@
             PageClasses = new string[] { "tm-paging-link" }
         })
 }
+@Html.Partial("Footer")

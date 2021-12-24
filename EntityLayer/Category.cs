@@ -13,6 +13,8 @@ namespace EntityLayer
         [Key]
         public int CategoryId { get; set; }
         [StringLength(20)]
+        public string CategoryColor { get; set; }
+        public string CategoryImg { get; set; }
         public string CategoryName { get; set; }
         public ICollection<Blog> Blogs { get; set; }
     }

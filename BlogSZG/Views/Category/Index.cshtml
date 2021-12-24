@@ -1,9 +1,17 @@
-﻿@model BusinessLayer.CategoryManager
-@{
-    ViewData["Title"] = "Index";
-}
-
+﻿@model IEnumerable<EntityLayer.Category>
 @Html.Partial("/Views/Blog/SearchForm.cshtml")
-@Html.Partial("CategoryList", Model.GetAll())
+@{
+    foreach (var item in Model)
+    {
+        <ul class="tm-category-list">
+            <li class="tm-category">
+                <div><img class="img-fluid" src="@item.CategoryImg" alt="@item.CategoryName" /></div>
+                <div style="background-color: @item.CategoryColor; width:100%; text-align:center; font-size: 24px;">
+                    @Html.ActionLink(@item.CategoryName,"BlogsByCategory","Blog", new { id = item.CategoryId})
+                </div>
+            </li>
+        </ul>
+    }
+}
 @Html.Partial("/Views/Blog/Footer.cshtml")
 

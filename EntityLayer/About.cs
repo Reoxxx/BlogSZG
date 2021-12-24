@@ -16,9 +16,10 @@ namespace EntityLayer
         public string AboutImg { get; set; }
         public string AboutContent1 { get; set; }
         public string AboutContent2 { get; set; }
-
-        //public int AuthorId { get; set; }
-       // public Author Author { get; set; }
+        [StringLength(150)]
+        public string AboutShort { get; set; }
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
 
     }
 }

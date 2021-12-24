@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace EntityLayer
 {
-    public class Member
+    public class User
     {
         [Key]
-        public int MemberId { get; set; }
+        public int UserId { get; set; }
         [StringLength(20)]
         public string Name { get; set; }
         [StringLength(20)]
@@ -21,8 +21,9 @@ namespace EntityLayer
         public string Username { get; set; }
         [StringLength(20)]
         public string Password { get; set; }
-        public DateTime MemberDate { get; set; }
+        public DateTime RegisterDate { get; set; }
         [StringLength(200)]
         public string ProfileImg { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

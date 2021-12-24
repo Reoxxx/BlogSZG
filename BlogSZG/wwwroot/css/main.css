@@ -113,7 +113,7 @@ p{
 
 .tm-nav-link {
     color: white;
-    background-color: transparent;
+    background-color: #89aaa5;
     height: 75px;
     width: 100%;
     max-width: 300px;
@@ -345,7 +345,6 @@ video {
 
 .tm-comment {
     display: flex;
-    align-items: flex-start;
 }
 
 .tm-comment-figure {
@@ -366,19 +365,12 @@ video {
     display:flex;
     flex-wrap:wrap;
     justify-content:space-evenly;
+    flex-direction:row;
     list-style-type: none;
 }
 .tm-category {
-    display:block;
-    font-size:22px;
     width:300px;
     height:200px;
-    background-color: white;
-    text-align:center;
-    align-self:center;
-}
-.tm-category div{
-
 }
 figure { margin: 0; }
 figcaption { line-height: 1.4; }

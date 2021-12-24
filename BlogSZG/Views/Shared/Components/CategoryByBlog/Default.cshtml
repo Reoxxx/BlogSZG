@@ -1,0 +1,8 @@
+﻿@model EntityLayer.Category
+@{
+
+    <span style="background-color: @Model.CategoryColor !important; padding: 5px;">
+        @Html.ActionLink(@Model.CategoryName,"BlogsByCategory","Blog", new { id = Model.CategoryId})
+    </span>
+}
+

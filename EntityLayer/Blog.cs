@@ -17,7 +17,6 @@ namespace EntityLayer
         [StringLength(250)]
         public string BlogImg { get; set; }
         public string BlogContent { get; set; }
-        public ICollection<Tag> Tags { get; set; }
         public DateTime BlogDate { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }

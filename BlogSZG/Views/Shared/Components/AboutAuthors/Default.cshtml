@@ -1,0 +1,21 @@
+﻿@model IEnumerable<EntityLayer.About>
+
+
+<div class="row tm-row tm-mb-60">
+    <div class="col-12">
+        <hr class="tm-hr-primary  tm-mb-55">
+    </div>
+    @{ foreach (var item in Model)
+        {
+            <div class="col-lg-6 tm-mb-60 tm-person-col">
+                <div class="media tm-person">
+                    <img src="@item.AboutImg" alt="Image" class="img-fluid mr-4" style="width:140px; height:210px;">
+                    <div class="media-body">
+                        <h2 class="tm-color-primary tm-post-title mb-2">@await Component.InvokeAsync("AuthorByAbout", item.AuthorId)</h2>
+                        <p class="mb-0 tm-line-height-short">@item.AboutShort</p>
+                    </div>
+                </div>
+            </div>
+            }
+        }
+</div>

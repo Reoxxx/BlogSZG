@@ -15,5 +15,12 @@ namespace BusinessLayer
         {
             return repocategory.List();
         }
+
+        public Category GetCategoryById(int id)
+        {
+            Category category = repocategory.List().Where(p => p.CategoryId == id).FirstOrDefault();
+            return category;
+
+        }
     }
 }

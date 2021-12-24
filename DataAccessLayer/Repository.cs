@@ -14,7 +14,7 @@ namespace DataAccessLayer
 
         BlogContext context = new BlogContext();
         DbSet<T> _object;
-
+        DbSet<EntityLayer.Comment> comments;
         public Repository()
         {
             _object = context.Set<T>();
@@ -26,24 +26,24 @@ namespace DataAccessLayer
             
         }
 
-        int IRepository<T>.Insert(T p)
+        public int Insert(T p)
         {
             _object.Add(p);
             return context.SaveChanges();
         }
 
-        int IRepository<T>.Update(T p)
+        public int Update(T p)
         {
             return context.SaveChanges();
         }
 
-        int IRepository<T>.Delete(T p)
+        public int Delete(T p)
         {
             _object.Remove(p);
             return context.SaveChanges();
         }
 
-        T IRepository<T>.GetById(int id)
+        public T GetById(int id)
         {
             return _object.Find(id);
         }

@@ -17,7 +17,7 @@ namespace DataAccessLayer
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Member> Members { get; set; }
+        public DbSet<User> Users { get; set; }
         public BlogContext()
         {
 
@@ -26,6 +26,14 @@ namespace DataAccessLayer
         {
             string connection = "Server=(localdb)\\MSSQLLocalDB;Database=BlogSzg;Trusted_Connection=true;MultipleActiveResultSets=true;";
             optionsBuilder.UseSqlServer(connection);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<About>()
+                .HasOne(p => p.Author)
+                .WithOne(p => p.About)
+                .HasForeignKey<About>(p => p.AuthorId);
         }
 
     }

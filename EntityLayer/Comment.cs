@@ -16,9 +16,9 @@ namespace EntityLayer
         [StringLength(200)]
         public string CommentContent { get; set; }
         public DateTime CommentDate { get; set; }
-        [StringLength(50)]
-        public string Mail { get; set; }
         public int BlogId { get; set; }
         public Blog Blogs { get; set; }
+        public int UserId { get; set; }
+        public User user { get; set; }
     }
 }

@@ -11,6 +11,9 @@ namespace BlogSZG.Controllers
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager();
+        CategoryManager cm = new CategoryManager();
+        AuthorManager authorManager = new AuthorManager();
+        CommentManager com = new CommentManager();
         public IActionResult Index(int page = 1)
         {
             var bloglist = bm.GetAll().ToPagedList(page,3);
@@ -25,31 +28,30 @@ namespace BlogSZG.Controllers
         {
             return PartialView();
         }
-        public PartialViewResult BlogList()
-        {
-            return PartialView();
-        }
         public PartialViewResult Footer()
         {
             return PartialView();
         }
-        public PartialViewResult Paging()
+
+        public ActionResult BlogsByCategory(int id)
         {
-            return PartialView();
+            TempData["categoryName"] =cm.GetCategoryById(id).CategoryName;
+            TempData["categoryId"] = id;
+            var blogs = bm.GetBlogsByCategory(id).ToPagedList(1, 3);
+            return View(blogs);
         }
 
-        public PartialViewResult BlogCover()
+        public ActionResult BlogsByAuthor(int id)
         {
-            return PartialView();
-        }
-        public PartialViewResult BlogContent()
-        {
-            return PartialView();
+            TempData["authorName"] = authorManager.GetAuthorById(id).Name + " " + authorManager.GetAuthorById(id).Surname;
+            TempData["authorId"] = id;
+            var blogs = bm.GetBlogsByAuthor(id).ToPagedList(1, 3);
+            return View(blogs);
         }
 
-        public PartialViewResult Tags()
+        public int CommentCount(int id)
         {
-            return PartialView();
+            return com.GetCommentCount(id);
         }
     }
 }

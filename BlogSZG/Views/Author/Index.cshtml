@@ -1,9 +1,11 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model EntityLayer.Author
 
-@Html.Partial("AuthorAbout")
-@Html.Partial("AuthorBlogs")
-@Html.Partial("/Views/Blog/Paging.cshtml")
-@Html.Partial("/Views/Blog/Footer.cshtml")
+<div class="row tm-row tm-mb-40">
+    <div class="col-12">
+        <div class="mb-4">
+            <h1 style="text-align: center;">
+                @await Component.InvokeAsync("AuthorByBlog", Model.AuthorId)
+            </h1>
+            @await Component.InvokeAsync("AboutByAuthor", Model.AboutId)
+            @await Component.InvokeAsync("BlogsByAuthor", Model.AuthorId)
+            @Html.Partial("/Views/Blog/Footer.cshtml")

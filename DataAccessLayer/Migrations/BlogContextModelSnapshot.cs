@@ -39,7 +39,17 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
+                    b.Property<string>("AboutShort")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
                     b.HasKey("AboutId");
+
+                    b.HasIndex("AuthorId")
+                        .IsUnique();
 
                     b.ToTable("Abouts");
                 });
@@ -70,6 +80,9 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int>("AboutId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasMaxLength(20)
@@ -127,9 +140,15 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("CategoryColor")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CategoryImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
 
@@ -157,13 +176,14 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Mail")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("CommentId");
 
                     b.HasIndex("BlogId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -195,9 +215,9 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("EntityLayer.Member", b =>
+            modelBuilder.Entity("EntityLayer.User", b =>
                 {
-                    b.Property<int>("MemberId")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -205,9 +225,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Mail")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("MemberDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(20)
@@ -221,6 +238,9 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Surname")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -229,29 +249,20 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("MemberId");
+                    b.HasKey("UserId");
 
-                    b.ToTable("Members");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EntityLayer.Tag", b =>
+            modelBuilder.Entity("EntityLayer.About", b =>
                 {
-                    b.Property<int>("BlogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                    b.HasOne("EntityLayer.Author", "Author")
+                        .WithOne("About")
+                        .HasForeignKey("EntityLayer.About", "AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("BlogId1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BlogId");
-
-                    b.HasIndex("BlogId1");
-
-                    b.ToTable("Tag");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("EntityLayer.Blog", b =>
@@ -281,33 +292,37 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Blogs");
-                });
-
-            modelBuilder.Entity("EntityLayer.Tag", b =>
-                {
-                    b.HasOne("EntityLayer.Blog", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("BlogId1")
+                    b.HasOne("EntityLayer.User", "user")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Blogs");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("EntityLayer.Author", b =>
                 {
+                    b.Navigation("About");
+
                     b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("EntityLayer.Blog", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("EntityLayer.Category", b =>
                 {
                     b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("EntityLayer.User", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

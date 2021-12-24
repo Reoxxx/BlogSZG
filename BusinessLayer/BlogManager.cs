@@ -22,5 +22,14 @@ namespace BusinessLayer
             Blog post = repoblog.List().Where(p => p.BlogId == id).FirstOrDefault();
             return post;
         }
+
+        public List<Blog> GetBlogsByCategory(int id)
+        {
+            return repoblog.List().Where(p => p.CategoryId == id).ToList();
+        }
+        public List<Blog> GetBlogsByAuthor(int id)
+        {
+            return repoblog.List().Where(p => p.AuthorId == id).ToList();
+        }
     }
 }

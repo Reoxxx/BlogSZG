@@ -1,0 +1,18 @@
+﻿@model EntityLayer.Comment
+<form asp-action="CreateComment" asp-controller="Comment" method="post" class="mb-5 tm-comment-form">
+    <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
+    <div class="mb-4">
+        <label asp-for="CommentSubject" >Konu:</label>
+        <input asp-for="CommentSubject" class="form-control"  name="CommentSubject" type="text">
+    </div>
+    <input class="form-control" asp-for="BlogId" type="hidden" name="BlogID" value="@ViewData["BlogId"]">
+    <input class="form-control" asp-for="UserId" type="hidden" name="UserID" value="1">
+    <input class="form-control" asp-for="CommentDate" type="hidden" name="UserID" value="@DateTime.Now.ToShortDateString()">
+    <div class="mb-4">
+        <label asp-for="CommentContent">Mesaj:</label>
+        <textarea class="form-control" asp-for="CommentContent" name="CommentContent" rows="6"></textarea>
+    </div>
+    <div class="text-right">
+        <button class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+    </div>
+</form>

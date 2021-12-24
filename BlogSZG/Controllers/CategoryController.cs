@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using EntityLayer;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace BlogSZG.Controllers
         
         public IActionResult Index()
         {
-            return View(cm);
+            return View(cm.GetAll());
         }
 
         public ActionResult Category()
@@ -21,11 +22,6 @@ namespace BlogSZG.Controllers
             return View();
         }
 
-        public PartialViewResult CategoryList()
-        {
-        
-            return PartialView();
-        }
 
     }
 }
