@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,6 +47,16 @@ namespace DataAccessLayer
         public T GetById(int id)
         {
             return _object.Find(id);
+        }
+
+        public List<T> List(Expression<Func<T, bool>> where)
+        {
+            return _object.Where(where).ToList();
+        }
+
+        public T Find(Expression<Func<T, bool>> where)
+        {
+            return _object.FirstOrDefault(where);
         }
     }
 }

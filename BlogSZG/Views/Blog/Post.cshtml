@@ -18,7 +18,7 @@
 
             <div class="mb-4">
                 <h1 class="pt-1 tm-color-primary tm-post-title">@Model.BlogTitle </h1>
-                <p class="tm-mb-40">@(((DateTime)Model.BlogDate).ToString("dd-MMM-yyyy")) posted by @await Component.InvokeAsync("AuthorByBlog", Model.AuthorId)</p>
+                <p class="tm-mb-40">@(((DateTime)Model.BlogDate).ToString("dd-MMM-yyyy")) posted by @await Component.InvokeAsync("AuthorById", Model.AuthorId)</p>
                 <p>@Model.BlogContent</p>
                 <span class="d-block text-right tm-color-primary">@await Component.InvokeAsync("CategoryByBlog", Model.CategoryId)</span>
             </div>

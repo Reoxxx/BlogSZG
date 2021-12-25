@@ -48,7 +48,7 @@
                 <hr>
                 <div class="d-flex justify-content-between">
                     @await Component.InvokeAsync("CommentCount", item.BlogId)
-                    @await Component.InvokeAsync("AuthorByBlog", item.AuthorId)
+                    @await Component.InvokeAsync("AuthorById", item.AuthorId)
                 </div>
             </article>
         </div>

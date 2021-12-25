@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "CommentById";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model EntityLayer.Comment
+<div class="col-lg-12 tm-md-12 tm-sm-12 tm-col">
+    <div class="bg-white tm-block h-100">
+        <div class="d-flex flex-row">
+            <figure class="figure-img">
+                <img src="/img/comment-1.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+                <figcaption class="tm-color-primary">@await Component.InvokeAsync("UserById", Model.UserId)</figcaption>
+            </figure>
+            <div class="d-flex flex-column p-3">
+                <h4>@Model.CommentSubject</h4>
+                <div>
+                    <p>@Model.CommentContent</p>
+                    <div class="d-flex justify-content-between">
+                        <span>@(((DateTime)Model.CommentDate).ToString("dd-MMM-yyyy"))</span>
+                    </div>
+                    <form asp-action="DeleteComment" asp-controller="Comment" asp-route-id="@Model.CommentId" method="post">
+                        <button type="submit" class="btn btn-primary m-3">
+                            Sil
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+@{
+    ViewData["Title"] = "admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model IEnumerable<EntityLayer.Blog>
+
+    <div class="col-lg-12 tm-md-12 tm-sm-12 tm-col">
+        <div class="bg-white tm-block h-100">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <h2 class="tm-block-title d-inline-block">Bloglar</h2>
+
+                </div>
+                <div class="col-md-4 col-sm-12 text-right">
+                    <a asp-action="AddBlog" asp-controller="Blog" class="btn btn-small btn-primary">Yeni Blog Ekle</a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped tm-table-striped-even mt-3">
+                    <thead>
+                        <tr class="tm-bg-gray">
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col">Başlık</th>
+                            <th scope="col" class="text-center">Kategori</th>
+                            <th scope="col" class="text-center">Yazar</th>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Düzenle</th>
+                            <th scope="col">Sil</th>
+                            <th scope="col">Detay</th>
+                            <th scope="col">Yorumlar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model){
+                        <tr>
+                            <th scope="row">
+                                <input type="checkbox" aria-label="Checkbox">
+                            </th>
+                            <td class="tm-product-name">@item.BlogTitle</td>
+                            <td class="text-center">@await Component.InvokeAsync("CategoryByBlog",item.CategoryId) </td>
+                            <td class="text-center">@await Component.InvokeAsync("AuthorById", item.AuthorId)</td>
+                            <td class="text-center">@(((DateTime)item.BlogDate).ToString("dd-MMM-yyyy"))</td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<a class="fas fa-edit" asp-action="UpdateBlog" asp-controller="Blog" asp-route-id="@item.BlogId"></a></td>
+                            <td><a class="fas fa-trash-alt tm-trash-icon" asp-action="DeleteBlog" asp-controller="Blog" asp-route-id="@item.BlogId"></a></td>
+                            <td>&nbsp;&nbsp;<a asp-action="Post" asp-controller="Blog" asp-route-id="@item.BlogId" target="_blank" class="fas fa-book-open"></a></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<a asp-action="BlogComments" asp-controller="Blog" asp-route-id="@item.BlogId" class="fas fa-comments"></a></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tm-table-mt tm-table-actions-row">
+                <div class="tm-table-actions-col-left">
+                    <button class="btn btn-danger">Seçili Blogları Sil</button>
+                </div>
+                <div class="tm-table-actions-col-right">
+                    <span class="tm-pagination-label">Sayfa</span>
+                    <nav aria-label="Page navigation" class="d-inline-block">
+                        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new X.PagedList.Web.Common.PagedListRenderOptions
+                        {
+                        LiElementClasses = new string[] { "page-item" },
+                        PageClasses = new string[] { "page-link" }
+                        })
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>

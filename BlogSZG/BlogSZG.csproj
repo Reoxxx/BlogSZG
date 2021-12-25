@@ -5,8 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\fontawesome.min.css" />
+    <Content Remove="wwwroot\css\tooplate.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\bootstrap.min.css" />
+    <None Include="wwwroot\css\fontawesome.min.css" />
     <None Include="wwwroot\css\main.css" />
+    <None Include="wwwroot\css\tooplate.css" />
     <None Include="wwwroot\fontawesome\css\all.min.css" />
     <None Include="wwwroot\fontawesome\LICENSE.txt" />
     <None Include="wwwroot\fontawesome\webfonts\fa-brands-400.eot" />

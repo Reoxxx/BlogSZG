@@ -35,5 +35,17 @@ namespace BusinessLayer
             int count = repocomment.List().Count(p => p.BlogId == id);
             return count;
         }
+
+        public Comment GetCommentById(int id)
+        {
+            Comment c = repocomment.Find(p => p.CommentId == id);
+            return c;
+        }
+
+        public int DeleteComment(int id)
+        {
+
+            return repocomment.Delete(repocomment.Find(p => p.CommentId == id));
+        }
     }
 }

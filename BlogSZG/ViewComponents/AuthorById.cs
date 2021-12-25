@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSZG.ViewComponents
 {
-    public class AuthorByBlog : ViewComponent
+    public class AuthorById : ViewComponent
     {
         AuthorManager authorManager = new AuthorManager();
         public IViewComponentResult Invoke(int id)

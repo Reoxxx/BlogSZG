@@ -1,0 +1,64 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+@{
+    ViewData["Title"] = "BlogComments";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model IEnumerable<EntityLayer.Comment>
+
+<div class="col-lg-12 tm-md-12 tm-sm-12 tm-col">
+    <div class="bg-white tm-block h-100">
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <h2 class="tm-block-title d-inline-block">Yorumlar</h2>
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped tm-table-striped-even mt-3">
+                <thead>
+                    <tr class="tm-bg-gray">
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col" class="text-center">Kullanıcı</th>
+                        <th scope="col" class="text-center">Konu</th>
+                        <th scope="col" class="text-center">Tarih</th>
+                        <th scope="col">Düzenle</th>
+                        <th scope="col">Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">
+                                <input type="checkbox" aria-label="Checkbox">
+                            </th>
+                            <td class="tm-product-name">@await Component.InvokeAsync("UserById",item.UserId)</td>
+                            <td class="text-center">@item.CommentSubject</td>
+                            <td class="text-center">@(((DateTime)item.CommentDate).ToString("dd-MMM-yyyy"))</td>
+                            <td>&nbsp;&nbsp;<a asp-action="CommentById" asp-controller="Comment" asp-route-id="@item.CommentId" class="fas fa-book-open"></a></td>
+                            <td><a class="fas fa-trash-alt tm-trash-icon" asp-action="DeleteComment" asp-controller="Comment" asp-route-id="@item.BlogId"></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tm-table-mt tm-table-actions-row">
+            <div class="tm-table-actions-col-left">
+                <button class="btn btn-danger">Seçili Blogları Sil</button>
+            </div>
+            <div class="tm-table-actions-col-right">
+                <span class="tm-pagination-label">Sayfa</span>
+                <nav aria-label="Page navigation" class="d-inline-block">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new X.PagedList.Web.Common.PagedListRenderOptions
+                    {
+                    LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" }
+                    })
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

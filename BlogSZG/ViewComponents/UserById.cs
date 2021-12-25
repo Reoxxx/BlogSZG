@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using EntityLayer;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace BlogSZG.ViewComponents
 {
-    public class AuthorByAbout : ViewComponent
+    public class UserById : ViewComponent
     {
-        AuthorManager authorManager = new AuthorManager();
+        UserManager um = new UserManager();
         public IViewComponentResult Invoke(int id)
         {
-            return View(authorManager.GetAuthorById(id));
+            User user = um.GetUserById(id);
+            return View(user);
         }
     }
 }

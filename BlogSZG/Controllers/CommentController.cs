@@ -22,5 +22,15 @@ namespace BlogSZG.Controllers
             cm.AddComment(comment);
             return RedirectToAction("Post","Blog",new { id = comment.BlogId });
         }
+        public ActionResult CommentById(int id)
+        {
+            return View(cm.GetCommentById(id));
+        }
+
+        public ActionResult DeleteComment(int id)
+        {
+            cm.DeleteComment(id);
+            return RedirectToAction("AdminBlogList", "Blog");
+        }
     }
 }

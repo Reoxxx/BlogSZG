@@ -31,5 +31,28 @@ namespace BusinessLayer
         {
             return repoblog.List().Where(p => p.AuthorId == id).ToList();
         }
+
+        public int AddBlog(Blog b)
+        {
+            return repoblog.Insert(b);
+        }
+
+        public int DeleteBlog(int id)
+        {
+            Blog blog = repoblog.Find(p => p.BlogId == id);
+            return repoblog.Delete(blog);
+        }
+
+        public int UpdateBlog(Blog b)
+        {
+            Blog blog=repoblog.Find(p => p.BlogId == b.BlogId);
+            blog.BlogTitle = b.BlogTitle;
+            blog.BlogContent = b.BlogContent;
+            blog.BlogImg = b.BlogImg;
+            blog.CategoryId = b.CategoryId;
+            blog.BlogDate = b.BlogDate;
+
+            return repoblog.Update(blog);
+        }
     }
 }

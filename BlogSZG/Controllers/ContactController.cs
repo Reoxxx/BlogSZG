@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer;
+using EntityLayer;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +10,16 @@ namespace BlogSZG.Controllers
 {
     public class ContactController : Controller
     {
+        ContactManager cm = new ContactManager();
         public IActionResult Index()
         {
             return View();
         }
 
-        public PartialViewResult ContactForm()
+        public ActionResult SendMessage(Contact contact) 
         {
-            return PartialView();
-        }
-
-        public PartialViewResult ContactUs()
-        {
-            return PartialView();
+            cm.AddContact(contact);
+            return RedirectToAction("Index","Contact");
         }
     }
 }
