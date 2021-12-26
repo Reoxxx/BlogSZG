@@ -21,6 +21,20 @@ namespace BusinessLayer
             Author author = repoauthor.List().Where(p => p.AuthorId == id).FirstOrDefault();
             return author;
         }
+        public int DeleteAuthor(int id)
+        {
+            Author Author = repoauthor.Find(p => p.AuthorId == id);
+            return repoauthor.Delete(Author);
+        }
 
+        public int UpdateAuthor(Author u)
+        {
+            Author Author = repoauthor.Find(p => p.AuthorId == u.AuthorId);
+            Author.Name = u.Name;
+            Author.Surname = u.Surname;
+            Author.AuthorImg = u.AuthorImg;
+            return repoauthor.Update(Author);
+
+        }
     }
 }

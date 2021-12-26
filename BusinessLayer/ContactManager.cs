@@ -25,6 +25,16 @@ namespace BusinessLayer
             return repocontact.Insert(c);
         }
 
+        public void DeleteContact(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetMessage(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         /*public Contact GetContactById(int id)
         {
             Contact Contact = repocontact.List().Where(p => p.ContactId == id).FirstOrDefault();

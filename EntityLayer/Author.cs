@@ -17,7 +17,7 @@ namespace EntityLayer
         [StringLength(20)]
         public string Surname { get; set; }
         public ICollection<Blog> Blogs { get; set; }
-
+        public string AuthorImg { get; set; }
         public int AboutId { get; set; }
         public About About { get; set; }
 

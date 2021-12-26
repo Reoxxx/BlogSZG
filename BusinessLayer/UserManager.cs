@@ -22,5 +22,24 @@ namespace BusinessLayer
             return User;
         }
 
+        public int DeleteUser(int id)
+        {
+            User user = repouser.Find(p => p.UserId == id);
+            return repouser.Delete(user);
+        }
+
+        public int UpdateUser(User u)
+        {
+            User user = repouser.Find(p => p.UserId == u.UserId);
+            user.Username = u.Username;
+            user.Name = u.Name;
+            user.Surname = u.Surname;
+            user.Password = u.Password;
+            user.Mail = u.Mail;
+            user.ProfileImg = u.ProfileImg;
+            user.RegisterDate = u.RegisterDate;
+            return repouser.Update(user);
+
+        }
     }
 }
